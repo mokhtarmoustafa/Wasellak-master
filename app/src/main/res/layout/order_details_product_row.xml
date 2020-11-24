@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="product"
+            type="com.unicom.wasalakclientproduct.model.category.Product" />
+        <variable
+            name="emptyString"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/category_name"
+            app:layout_constraintBottom_toBottomOf="@id/product_price"
+            app:srcCompat="@drawable/ic_wasellak_logo_color"
+            android:scaleType="centerInside"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:alpha="0.5"
+            android:fontFamily="@font/cairo_regular"
+            android:text="@{product.productCategories!=null?product.productCategories.get(0).category.displayName:emptyString}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_10sp"
+            app:layout_constraintStart_toEndOf="@id/product_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@{product.product.nameAr}"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/category_name"
+            app:layout_constraintTop_toBottomOf="@id/category_name" />
+
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:text="@{String.format(@string/discount_placeholder,product.price * product.quantity)}"
+            android:textColor="#137C7C"
+            android:textSize="@dimen/dimen_14sp"
+            app:layout_constraintStart_toStartOf="@id/category_name"
+            app:layout_constraintTop_toBottomOf="@id/product_name" />
+
+        <TextView
+            android:id="@+id/product_price_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_12dp"
+            android:fontFamily="@font/cairo_regular"
+            strikethrough="@{true}"
+            android:text="@{String.format(@string/discount_placeholder,product.price * product.quantity)}"
+            android:textColor="#437B7B"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="@id/product_price"
+            app:layout_constraintStart_toEndOf="@id/product_price"
+            app:layout_constraintTop_toTopOf="@id/product_price" />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:fontFamily="@font/cairo_regular"
+            android:text="@string/quantity"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintStart_toStartOf="@id/category_name"
+            app:layout_constraintTop_toBottomOf="@id/product_price" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/quantity_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:layout_marginStart="@dimen/dimen_3dp"
+            android:fontFamily="@font/cairo_regular"
+            android:text="@{String.valueOf(product.quantity)}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintStart_toEndOf="@id/quantity"
+            app:layout_constraintTop_toBottomOf="@id/product_price" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_0.5dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:alpha="0.3"
+            android:background="#3C3C43"
+            app:layout_constraintTop_toBottomOf="@id/quantity" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

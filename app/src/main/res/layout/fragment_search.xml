@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.unicom.wasalakclientproduct.ui.search.SearchFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.unicom.wasalakclientproduct.ui.search.SearchViewModel" />
+
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                style="@style/MyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/header_linear_bg"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@id/toolbar_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/toolbar_img"
+                        app:layout_constraintTop_toTopOf="@id/toolbar_img">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/cairo_regular"
+                            android:hint="@string/search_want"
+                            android:paddingStart="@dimen/dimen_12dp"
+                            android:singleLine="true"
+                            android:text="@={viewModel.productName}"
+                            android:textAlignment="viewStart"
+                            android:textColorHint="@color/malachite"
+                            android:textSize="@dimen/dimen_14sp"
+                            />
+                        <requestFocus/>
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                            android:layout_width="@dimen/dimen_28dp"
+                            android:layout_height="@dimen/dimen_28dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/dimen_8dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:clickable="true"
+                            android:onClick="@{()->fragment.search(viewModel.productName)}"
+                            app:cornerRadius="@dimen/dimen_24dp"
+                            app:icon="@drawable/ic_baseline_search_24"
+                            app:strokeWidth="0dp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/toolbar_img"
+                        android:layout_width="@dimen/dimen_24dp"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginBottom="@dimen/dimen_12dp"
+                        android:tint="#A8000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_baseline_close_24" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/dimen_16dp" />
+
+            <FrameLayout
+                android:id="@+id/progress_bar_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-6dp"
+                    android:indeterminate="true"
+                    android:visibility="@{viewModel.isLoading == null || viewModel.isLoading ? fragment.view.VISIBLE : fragment.view.GONE}" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvEmptyData"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="center"
+                android:text="@string/no_previous_search_records"
+                android:textColor="#8A000000"
+                android:textSize="@dimen/dimen_16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/end_guide"
+                app:layout_constraintStart_toStartOf="@id/start_guide"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clClearSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@id/end_guide"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvSearchData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo_semibold"
+                    android:text="@string/previous_search_records"
+                    android:textColor="#8A000000"
+                    android:textSize="@dimen/dimen_16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSearchClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo_semibold"
+                    android:onClick="@{()->fragment.showRemoveSearchDataDialog()}"
+                    android:text="@string/clear"
+                    android:textColor="#E02020"
+                    android:textSize="@dimen/dimen_14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:layout_marginBottom="@dimen/dimen_12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toBottomOf="@+id/clClearSearch">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:adapter="@{fragment.adapter}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/layout_search_list_row" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

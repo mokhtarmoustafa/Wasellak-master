@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_nav_graph.xml"
+    app:startDestination="@id/orderDetailsFragment">
+
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.MyAccountFragment"
+        android:label="MyAccountFragment">
+
+        <action
+            android:id="@+id/action_myAccountFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_myAccountFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_myAccountFragment_to_addressesFragment"
+            app:destination="@id/addressesFragment" />
+        <action
+            android:id="@+id/action_myAccountFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_myAccountFragment_to_termsAndConditionsFragment"
+            app:destination="@id/termsAndConditionsFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/orderHistoryFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.OrderHistoryFragment"
+        android:label="OrderHistoryFragment" />
+    <fragment
+        android:id="@+id/marketsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.MarketsFragment"
+        android:label="RequestsFragment">
+        <action
+            android:id="@+id/action_marketsFragment_to_vendorFinderFrgament"
+            app:destination="@id/vendorFinderFrgament"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_marketsFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.ProfileFragment"
+        android:label="ProfileFragment">
+
+        <argument
+            android:name="profileAccount"
+            app:argType="com.unicom.wasalakclientproduct.model.user.AccountModel$Result"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+
+        <action
+            android:id="@+id/action_profileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.EditProfileFragment"
+        android:label="EditProfileFragment">
+
+        <argument
+            android:name="profile"
+            app:argType="com.unicom.wasalakclientproduct.model.user.AccountModel$Result"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryProductsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.category.CategoryProductsFragment"
+        android:label="ProductsFragment">
+        <argument
+            android:name="branch_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_categoryProductsFragment_to_branchDetailsFragment"
+            app:destination="@id/branchDetailsFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_categoryProductsFragment_to_productVendorListFragment"
+            app:destination="@id/productVendorListFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_categoryProductsFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+
+        <action
+            android:id="@+id/action_categoryProductsFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+
+        <argument
+            android:name="branch_name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/branchDetailsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.branchDetails.BranchDetailsFragment"
+        android:label="BranchDetailsFragment">
+        <argument
+            android:name="branch_detail"
+            app:argType="com.unicom.wasalakclientproduct.model.branch.BranchResponse"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_branchDetailsFragment_to_productVendorListFragment"
+            app:destination="@id/productVendorListFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_branchDetailsFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+    </fragment>
+    <fragment
+        android:id="@+id/vendorFinderFrgament"
+        android:name="com.unicom.wasalakclientproduct.ui.vendor.VendorFinderFrgament"
+        android:label="VendorFinderFrgament">
+
+
+        <argument
+            android:name="market_type_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_vendorFinderFrgament_to_categoryProductsFragment"
+            app:destination="@id/categoryProductsFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+
+        <action
+            android:id="@+id/action_vendorFinderFrgament_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+    </fragment>
+    <fragment
+        android:id="@+id/productVendorListFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.product_list.ProductVendorListFragment"
+        android:label="ProductVendorListFragment">
+        <argument
+            android:name="braanch_detail"
+            app:argType="com.unicom.wasalakclientproduct.model.branch.BranchResponse"
+            app:nullable="true" />
+        <argument
+            android:name="category_id"
+            app:argType="integer" />
+        <argument
+            android:name="category_name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_productVendorListFragment_to_branchDetailsFragment"
+            app:destination="@id/branchDetailsFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <action
+            android:id="@+id/action_productVendorListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+
+        <action
+            android:id="@+id/action_productVendorListFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+        <argument
+            android:name="branch_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.productDetails.ProductDetailFragment"
+        android:label="ProductDetailFragment">
+
+        <action
+            android:id="@+id/action_productDetailFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+
+        <argument
+            android:name="branchId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <argument
+            android:name="categoryId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+        <argument
+            android:name="productName"
+            app:argType="string"
+            app:nullable="true" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/newAddressFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.addresses.NewAddressFragment"
+        android:label="NewAddressFragment">
+        <action
+            android:id="@+id/action_newAddressFragment_to_locationAddressFragment"
+            app:destination="@id/locationAddressFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+        <argument
+            android:name="addressData"
+            app:argType="com.unicom.wasalakclientproduct.model.user.address.Result"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressesFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.addresses.AddressesFragment"
+        android:label="AddressesFragment">
+        <action
+            android:id="@+id/action_addressesFragment_to_newAddressFragment"
+            app:destination="@id/newAddressFragment"
+            app:enterAnim="@anim/fade_in_left"
+            app:exitAnim="@anim/fade_out_left"
+            app:popExitAnim="@anim/fade_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationAddressFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.user.addresses.LocationAddressFragment"
+        android:label="LocationAddressFragment">
+        <action
+            android:id="@+id/action_locationAddressFragment_to_newAddressFragment"
+            app:destination="@id/newAddressFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.questions.QuestionsFragment"
+        android:label="QuestionsFragment" />
+    <fragment
+        android:id="@+id/termsAndConditionsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.termsandconditions.TermsAndConditionsFragment"
+        android:label="TermsAndConditionsFragment" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.cart.CartFragment"
+        android:label="CartFragment">
+        <action
+            android:id="@+id/action_cartFragment_to_cartConfirmProductsFragment"
+            app:destination="@id/cartConfirmProductsFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_cartFragment_to_addressesFragment"
+        app:destination="@id/addressesFragment"
+        app:enterAnim="@anim/animate_slide_in_left"
+        app:exitAnim="@anim/animate_slide_left_exit"
+        app:popExitAnim="@anim/animate_slide_left_exit" />
+    <fragment
+        android:id="@+id/cartConfirmProductsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.cartConfirm.CartConfirmProductsFragment"
+        android:label="CartConfirmProductsFragment">
+        <action
+            android:id="@+id/action_cartConfirmProductsFragment_to_cartSuccessFragment"
+            app:destination="@id/cartSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartSuccessFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.cartConfirm.CartSuccessFragment"
+        android:label="CartSuccessFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    android:label="CartFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.search.SearchFragment"
+        android:label="SearchFragment">
+
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.search.SearchResultFragment"
+        android:label="SearchResultFragment">
+        <argument
+            android:name="searchData"
+            app:argType="com.unicom.wasalakclientproduct.model.search.Search" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_down_ex"
+            app:popExitAnim="@anim/animate_slide_down_ex" />
+
+        <action
+            android:id="@+id/action_searchResultFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/fade_in_left"
+            app:exitAnim="@anim/fade_out_left"
+            app:popExitAnim="@anim/fade_out_left" />
+
+        <action
+            android:id="@+id/action_searchResultFragment_to_branchDetailsFragment"
+            app:destination="@id/branchDetailsFragment"
+            app:enterAnim="@anim/animate_slide_down_enter"
+            app:exitAnim="@anim/animate_slide_up_exit"
+            app:popExitAnim="@anim/animate_slide_up_exit" />
+
+        <action
+            android:id="@+id/action_searchResultFragment_to_categoryProductsFragment"
+            app:destination="@id/categoryProductsFragment"
+
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_left_exit"
+            app:popExitAnim="@anim/animate_slide_left_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.unicom.wasalakclientproduct.ui.order.OrderDetailsFragment"
+        android:label="OrderDetailsFragment" />
+
+
+</navigation>

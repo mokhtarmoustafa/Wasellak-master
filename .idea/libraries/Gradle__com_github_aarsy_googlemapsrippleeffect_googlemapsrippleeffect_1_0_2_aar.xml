@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.aarsy.googlemapsrippleeffect:googlemapsrippleeffect:1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30096331085950c9841c8435c5b65f63/jetified-googlemapsrippleeffect-1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30096331085950c9841c8435c5b65f63/jetified-googlemapsrippleeffect-1.0.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30096331085950c9841c8435c5b65f63/jetified-googlemapsrippleeffect-1.0.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.aarsy.googlemapsrippleeffect/googlemapsrippleeffect/1.0.2/a88d83ddf9f630a5fc5bed4bb4967b83117335ba/googlemapsrippleeffect-1.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.aarsy.googlemapsrippleeffect/googlemapsrippleeffect/1.0.2/61e41862ff4666d5c6b57468973d99b2a18c7e7f/googlemapsrippleeffect-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

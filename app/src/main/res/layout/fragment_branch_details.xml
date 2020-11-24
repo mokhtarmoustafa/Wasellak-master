@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="fragment"
+            type="com.unicom.wasalakclientproduct.ui.branchDetails.BranchDetailsFragment" />
+
+        <variable
+            name="branchData"
+            type="com.unicom.wasalakclientproduct.model.branch.Result" />
+
+        <variable
+            name="categoryAdapter"
+            type="com.unicom.wasalakclientproduct.ui.branchDetails.BranchCategoryAdapter" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F9F9FB">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                style="@style/MyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                app:navigationIcon="@drawable/ic_arrow_back">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/ivSearch"
+                        android:layout_width="@dimen/dimen_24dp"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_marginStart="@dimen/dimen_16dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:src="@drawable/ic_baseline_search_24"
+                        app:layout_constraintBottom_toBottomOf="@id/tvName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tvName"
+                        android:clickable="true"
+                        android:onClick="@{()->fragment.navigateToSearch()}"/>
+
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:layout_marginBottom="@dimen/dimen_12dp"
+                        android:alpha="0.8"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivSearch"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@{branchData.displayName}" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9F9FB"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="100dp">
+
+
+            <TextView
+                android:id="@+id/tvAddressTitle4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/cairo_regular"
+                android:text="@string/sale_sections"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/dimen_16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivTimer3"
+                app:layout_constraintStart_toEndOf="@+id/ivTimer3"
+                app:layout_constraintTop_toTopOf="@+id/ivTimer3" />
+
+            <ImageView
+                android:id="@+id/ivTimer3"
+                android:layout_width="@dimen/dimen_24dp"
+                android:layout_height="@dimen/dimen_24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_category"
+                app:layout_constraintStart_toStartOf="@+id/ivTimer2"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:layout_marginEnd="16dp"
+                android:adapter="@{categoryAdapter}"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvAddressTitle4"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddressTitle4"
+                tools:listitem="@layout/layout_store_section" />
+
+            <TextView
+                android:id="@+id/tvRateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnShowDetails"
+                android:layout_alignStart="@+id/tvBrandName"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_regular"
+                android:text="4.6"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+            <ImageView
+                android:id="@+id/ivTimer2"
+                android:layout_width="@dimen/dimen_24dp"
+                android:layout_height="@dimen/dimen_24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_rate"
+                app:layout_constraintStart_toStartOf="@+id/ivTimer"
+                app:layout_constraintTop_toBottomOf="@+id/tvOpenState" />
+
+            <TextView
+                android:id="@+id/tvWorkingHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnShowDetails"
+                android:layout_alignStart="@+id/tvBrandName"
+                android:layout_marginStart="8dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_regular"
+                android:text="@{branchData.workingHoursFrom.concat(@string/char_sign).concat(branchData.workingHoursTo)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/tvOpenState"
+                app:layout_constraintTop_toTopOf="@+id/tvOpenState" />
+
+            <TextView
+                android:id="@+id/tvOpenState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnShowDetails"
+                android:layout_alignStart="@+id/tvBrandName"
+                android:layout_marginTop="6dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@{branchData.openNow ? @string/open_now : @string/closed_now}"
+                android:textColor="@color/malachite"
+                android:textSize="@dimen/dimen_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tvWorkDuration"
+                app:layout_constraintTop_toBottomOf="@+id/tvWorkDuration" />
+
+            <TextView
+                android:id="@+id/tvWorkDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/cairo_regular"
+                android:text="@string/work_time"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/dimen_16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivTimer"
+                app:layout_constraintStart_toEndOf="@+id/ivTimer"
+                app:layout_constraintTop_toTopOf="@+id/ivTimer" />
+
+            <TextView
+                android:id="@+id/tvAddressTitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_regular"
+                android:text="@string/rates"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/dimen_16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivTimer2"
+                app:layout_constraintStart_toStartOf="@+id/tvWorkDuration"
+                app:layout_constraintTop_toTopOf="@+id/ivTimer2" />
+
+            <ImageView
+                android:id="@+id/ivTimer"
+                android:layout_width="@dimen/dimen_24dp"
+                android:layout_height="@dimen/dimen_24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_timer"
+                app:layout_constraintStart_toStartOf="@+id/ivAddres"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddressKm" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvLogo"
+                android:layout_width="@dimen/dimen_54dp"
+                android:layout_height="@dimen/dimen_54dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:orientation="vertical"
+                app:cardCornerRadius="@dimen/dimen_6dp"
+                app:cardElevation="@dimen/dimen_6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_wasellak_logo_color" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvBrandName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:fontFamily="@font/cairo_bold"
+                android:text="@{branchData.displayName}"
+                android:textColor="@color/malachite"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintStart_toEndOf="@+id/cvLogo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotalProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvLogo"
+                android:layout_alignStart="@+id/cvLogo"
+                android:layout_marginTop="8dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_10sp"
+                android:textStyle="bold"
+                android:visibility="@{branchData.totalBranchProducts>0?View.VISIBLE:View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="@+id/cvLogo"
+                app:layout_constraintStart_toStartOf="@+id/cvLogo"
+                app:layout_constraintTop_toBottomOf="@+id/cvLogo"
+                android:text="@{@string/product_placeholder(branchData.totalBranchProducts)}" />
+
+            <TextView
+                android:id="@+id/tvDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnShowDetails"
+                android:layout_alignStart="@+id/tvBrandName"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="start"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvBrandName"
+                app:layout_constraintTop_toBottomOf="@+id/tvBrandName"
+                tools:text="@{branchData.displayDescription}" />
+
+            <ImageView
+                android:id="@+id/ivAddres"
+                android:layout_width="@dimen/dimen_24dp"
+                android:layout_height="@dimen/dimen_24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_address"
+                app:layout_constraintStart_toStartOf="@+id/tvTotalProducts"
+                app:layout_constraintTop_toBottomOf="@+id/tvTotalProducts" />
+
+            <TextView
+                android:id="@+id/tvAddressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/cairo_regular"
+                android:text="@string/branch_address"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/dimen_16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivAddres"
+                app:layout_constraintStart_toEndOf="@+id/ivAddres"
+                app:layout_constraintTop_toTopOf="@+id/ivAddres" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnShowDetails"
+                android:layout_alignStart="@+id/tvBrandName"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="center|start"
+                android:text="@{branchData.address}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvAddressTitle"
+                app:layout_constraintTop_toBottomOf="@+id/ivAddres" />
+
+            <TextView
+                android:id="@+id/tvAddressKm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnShowDetails"
+                android:layout_alignStart="@+id/tvBrandName"
+                android:alpha="0.5"
+                android:fontFamily="@font/cairo_regular"
+                android:textColor="@color/text_km"
+                android:textSize="@dimen/dimen_12sp"
+                app:layout_constraintStart_toStartOf="@+id/tvAddress"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddress"
+                 />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:max="5"
+                android:progressTint="@color/colorYellow"
+                android:rating="4.5"
+                app:layout_constraintStart_toStartOf="@+id/tvAddressTitle3"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddressTitle3" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

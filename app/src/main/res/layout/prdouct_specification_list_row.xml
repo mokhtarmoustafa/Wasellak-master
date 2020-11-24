@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productSpecification"
+            type="com.unicom.wasalakclientproduct.model.productDetails.ProductProperity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clParent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_32dp"
+        android:background="#F9F9FB">
+        <TextView
+            android:id="@+id/tvSpecificationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:alpha="0.5"
+            android:gravity="start|center_vertical|center_horizontal"
+            tools:text="@{productSpecification.getProperty().name}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSpecificationValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/dimen_6dp"
+            android:layout_marginBottom="@dimen/dimen_6dp"
+            android:gravity="start|center_vertical|center_horizontal"
+            tools:text="@{productSpecification.getPropertyValue().name}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSpecificationName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvSpecificationName"
+            app:layout_constraintTop_toTopOf="@+id/tvSpecificationName" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

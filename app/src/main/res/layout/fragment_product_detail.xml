@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productData"
+            type="com.unicom.wasalakclientproduct.model.productDetails.ProductResponse" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.Product_detail.ProductDetailFragment">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F9F9FB"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <include
+                    android:id="@+id/topAppBar"
+                    layout="@layout/layout_category_toolbar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/dimen_0.1dp"
+                    android:fillViewport="true"
+                    app:layout_constraintTop_toBottomOf="@+id/topAppBar">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.smarteist.autoimageslider.SliderView
+                            android:id="@+id/imageSlider"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHeight_percent="0.25"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:sliderAnimationDuration="1000"
+                            app:sliderAutoCycleDirection="back_and_forth"
+                            app:sliderAutoCycleEnabled="true"
+                            app:sliderIndicatorAnimationDuration="1000"
+                            app:sliderIndicatorGravity="center_horizontal|bottom"
+                            app:sliderIndicatorMargin="@dimen/dimen_15dp"
+                            app:sliderIndicatorOrientation="horizontal"
+                            app:sliderIndicatorPadding="@dimen/dimen_5dp"
+                            app:sliderIndicatorRadius="@dimen/dimen_2dp"
+                            app:sliderIndicatorSelectedColor="#00D472"
+                            app:sliderIndicatorUnselectedColor="#8000D472"
+                            app:sliderScrollTimeInSec="1"
+                            app:sliderStartAutoCycle="true" />
+
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="@{productData.result.productCategories.get(0).category.displayName}"
+                            android:textColor="#80000000"
+                            android:textSize="@dimen/dimen_10sp"
+                            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                            app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/start_guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/end_guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="@dimen/dimen_16dp" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:text="@{productData.result.displayName}"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                        <TextView
+                            android:id="@+id/tvProductPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:fontFamily="@font/cairo_bold"
+                            android:text="@{String.format(@string/discount_placeholder,productData.result.price)}"
+                            android:textColor="#137C7C"
+                            android:textSize="@dimen/dimen_16sp"
+                            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+                        <TextView
+                            android:id="@+id/tvProductdiscountPrice"
+                            strikethrough="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="239.99 د.ع"
+                            android:textColor="#137C7C"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvProductPrice"
+                            app:layout_constraintStart_toEndOf="@+id/tvProductPrice"
+                            app:layout_constraintTop_toTopOf="@+id/tvProductPrice" />
+
+                        <TextView
+                            android:id="@+id/tvProductdiscountPert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_8dp"
+                            android:fontFamily="@font/cairo_regular"
+                            android:text="خصم بنسبة (28%)"
+                            android:textColor="#137C7C"
+
+                            android:textSize="@dimen/dimen_12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvProductPrice"
+                            app:layout_constraintStart_toEndOf="@+id/tvProductdiscountPrice"
+                            app:layout_constraintTop_toTopOf="@+id/tvProductPrice" />
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:text="تقييم العملاء"
+                            android:textColor="#7C7C7D"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                            app:layout_constraintTop_toBottomOf="@+id/tvProductPrice" />
+
+                        <RatingBar
+                            android:id="@+id/ratingBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:rating="3.5"
+                            android:theme="@style/RatingBarSmallTheme"
+                            app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                            app:layout_constraintTop_toBottomOf="@+id/textView12"
+                            app:layout_goneMarginTop="@dimen/dimen_8dp" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:text="4.5"
+                            android:textColor="#9A9A9B"
+                            android:textSize="@dimen/dimen_12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_8dp"
+                            android:fontFamily="@font/cairo_semibold"
+                            android:text=" عرض التقييمات"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/dimen_12sp"
+
+                            app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                            app:layout_constraintStart_toEndOf="@+id/textView13"
+                            app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+                        <FrameLayout
+                            android:id="@+id/segementGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/segement_unchecked_bg"
+                            android:padding="@dimen/dimen_4dp"
+                            app:layout_constraintEnd_toEndOf="@id/start_guideline"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ratingBar">
+
+                            <com.google.android.material.tabs.TabLayout
+                                android:id="@+id/tab_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/dimen_35dp"
+                                android:background="@color/colorPrimaryDark"
+                                android:clipToPadding="true"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="@id/start_guideline"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                                app:tabBackground="@drawable/segemnt_radio_button_selector"
+                                app:tabGravity="fill"
+                                app:tabIndicator="@null"
+                                app:tabIndicatorHeight="0dp"
+                                app:tabMaxWidth="0dp"
+                                app:tabMode="fixed"
+                                app:tabPaddingEnd="6dp"
+                                app:tabPaddingStart="6dp"
+                                app:tabSelectedTextColor="@color/colorAccent"
+                                app:tabTextColor="@color/black">
+
+                                <com.google.android.material.tabs.TabItem
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/over_view"
+
+                                    />
+
+                                <com.google.android.material.tabs.TabItem
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/specefication" />
+
+                                <com.google.android.material.tabs.TabItem
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/ratings" />
+
+                            </com.google.android.material.tabs.TabLayout>
+                        </FrameLayout>
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/fragmentPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="500dp"
+                            android:layout_marginBottom="@dimen/dimen_76dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/segementGroup"
+                            app:layout_constraintVertical_bias="0" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.core.widget.NestedScrollView>
+
+
+                <include
+                    android:id="@+id/cartContainer"
+                    layout="@layout/layout_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/loadingProgress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+
+

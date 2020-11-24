@@ -1,0 +1,63 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<variable
+    name="searchData"
+    type="com.unicom.wasalakclientproduct.model.search.Search" />
+      
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clParent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_44dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tvSearchData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:duplicateParentState="true"
+            android:fontFamily="@font/cairo_semibold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivBack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Data"
+            android:text="@{searchData.name}"/>
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/dimen_24dp"
+            android:layout_height="@dimen/dimen_24dp"
+            android:layout_gravity="center"
+            android:duplicateParentState="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_forward"
+            android:tint="@color/malachite"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSearchData"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvSearchData" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.5"
+            android:background="@color/red_underline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginBottom="@dimen/dimen_1dp"
+            app:layout_constraintStart_toStartOf="@+id/tvSearchData"
+            app:layout_constraintTop_toBottomOf="@id/ivBack"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

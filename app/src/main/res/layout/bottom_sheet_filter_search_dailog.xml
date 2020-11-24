@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/dimen_16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/dimen_16dp" />
+
+        <ImageView
+            android:id="@+id/ivFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_filter_list_24"
+            android:tint="?attr/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/start_guide"
+            app:layout_constraintTop_toTopOf="@+id/top_guide" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/select_option"
+            android:textColor="#DE000000"
+            android:textSize="@dimen/dimen_20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivFilter"
+            app:layout_constraintStart_toEndOf="@+id/ivFilter"
+            app:layout_constraintTop_toTopOf="@+id/top_guide" />
+
+        <ImageView
+            android:id="@+id/ivReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_baseline_refresh_24"
+            app:layout_constraintBottom_toBottomOf="@+id/ivClose"
+            app:layout_constraintEnd_toStartOf="@+id/ivClose"
+            app:layout_constraintTop_toTopOf="@+id/top_guide" />
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintTop_toTopOf="@+id/top_guide" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:background="#8A000000"
+            app:layout_constraintTop_toBottomOf="@+id/ivClose" />
+
+        <TextView
+            android:id="@+id/tvInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/location_distance"
+            android:textColor="#8A000000"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/indicator_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_6dp"
+            android:stepSize="1.0"
+            android:value="10.0"
+            android:valueFrom="0.0"
+            android:valueTo="20.0"
+            app:labelBehavior="withinBounds"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintStart_toStartOf="@+id/start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/tvInstructions"
+            app:thumbColor="@color/colorAccent" />
+
+        <View
+            android:id="@+id/line0"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:alpha="0.5"
+            android:background="@color/red_underline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/indicator_seek_bar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvStoreType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/as_per_specific_store"
+            android:textColor="#80000000"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintStart_toStartOf="@+id/start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/line0"
+
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_Store"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:theme="@style/TextLabel"
+            app:boxCornerRadiusBottomEnd="@dimen/dimen_6dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="@dimen/dimen_6dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorAccent"
+            app:boxStrokeWidth="@dimen/dimen_0.5dp"
+            app:boxStrokeWidthFocused="@dimen/dimen_1dp"
+            app:endIconMode="dropdown_menu"
+            app:endIconTint="@color/gray"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/end_guide"
+            app:layout_constraintStart_toStartOf="@id/start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/tvStoreType">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/edt_store"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/cairo_bold"
+                android:hint="@string/store"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:nextFocusDown="@+id/edtActivity"
+                android:paddingStart="@dimen/dimen_16dp"
+                android:paddingTop="@dimen/dimen_8dp"
+                android:paddingEnd="@dimen/dimen_16dp"
+                android:paddingBottom="@dimen/dimen_8dp"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/dimen_16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:alpha="0.5"
+            android:background="@color/red_underline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_Store"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvDepartment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/according_to_a_specific_department"
+            android:textColor="#80000000"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintStart_toStartOf="@+id/start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/line1"
+
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_layout_Department"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:theme="@style/TextLabel"
+            app:boxCornerRadiusBottomEnd="@dimen/dimen_6dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="@dimen/dimen_6dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorAccent"
+            app:boxStrokeWidth="@dimen/dimen_0.5dp"
+            app:boxStrokeWidthFocused="@dimen/dimen_1dp"
+            app:endIconMode="dropdown_menu"
+            app:endIconTint="@color/gray"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/end_guide"
+            app:layout_constraintStart_toStartOf="@id/start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/tvDepartment">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/edtActivity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/cairo_bold"
+                android:hint="@string/department"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:paddingStart="@dimen/dimen_16dp"
+                android:paddingTop="@dimen/dimen_8dp"
+                android:paddingEnd="@dimen/dimen_16dp"
+                android:paddingBottom="@dimen/dimen_8dp"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/dimen_16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:alpha="0.5"
+            android:background="@color/red_underline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_layout_Department"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvShowDiscountProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/show_only_products_with_discounts"
+            android:textColor="#80000000"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintStart_toStartOf="@+id/start_guide"
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_marginBottom="214dp"
+            android:alpha="0.5"
+            android:background="@color/red_underline"
+            app:layout_constraintBottom_toTopOf="@+id/btnApply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDiscountProduct"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnApply"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:fontFamily="@font/cairo_bold"
+            android:paddingTop="@dimen/dimen_8dp"
+            android:text="@string/apply_search"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_16sp"
+            app:cornerRadius="@dimen/dimen_20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintStart_toStartOf="@+id/start_guide" />
+
+        <Switch
+            android:id="@+id/switch_Show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tvShowDiscountProduct"
+            app:layout_constraintEnd_toStartOf="@+id/end_guide"
+            app:layout_constraintTop_toTopOf="@+id/tvShowDiscountProduct" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

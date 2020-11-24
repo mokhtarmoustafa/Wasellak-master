@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.unicom.wasalakclientproduct.ui.vendor.VendorFinderFrgament" />
+
+        <variable
+            name="viewModel"
+            type="com.unicom.wasalakclientproduct.ui.vendor.VendorFinderViewModel" />
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.vendor.VendorFinderFrgament">
+
+            <include
+                android:id="@+id/topAppBar"
+                layout="@layout/layout_toolbar" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/dimen_16dp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/dimen_12dp"
+                android:background="@drawable/ic_circle_light_green"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_location_on_24px"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
+
+            <TextView
+                android:id="@+id/addressLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_12dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/cairo_regular"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginTop="8dp"
+                android:background="#1A000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressLabel" />
+
+            <TextView
+                android:id="@+id/fitlerTitleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/all_stores"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/vendorCounterLabel"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toTopOf="@+id/vendorCounterLabel" />
+
+            <com.unicom.wasalakclientproduct.utils.DrawableTextView
+                android:id="@+id/distnaceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:background="@drawable/ic_rounded_rect_shape_green"
+                android:drawableEnd="@drawable/ic_circle_close"
+                android:drawablePadding="@dimen/dimen_4dp"
+                android:fontFamily="@font/cairo_regular"
+                android:paddingStart="@dimen/dimen_8dp"
+                android:paddingTop="@dimen/dimen_5dp"
+                android:paddingEnd="@dimen/dimen_8dp"
+                android:paddingBottom="5dp"
+                android:textColor="#fff"
+                android:textSize="@dimen/dimen_12sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/fitlerTitleLabel"
+                app:layout_constraintStart_toEndOf="@+id/fitlerTitleLabel"
+                app:layout_constraintTop_toTopOf="@+id/fitlerTitleLabel"
+                tools:text="10 كم" />
+
+            <TextView
+                android:id="@+id/vendorCounterLabel"
+                android:layout_width="@dimen/dimen_26dp"
+                android:layout_height="@dimen/dimen_26dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_circle_shape_grey"
+                android:fontFamily="@font/cairo_bold"
+                android:text="0"
+                android:textColor="#80000000"
+                android:textSize="@dimen/dimen_12sp"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vendorRecycle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toBottomOf="@+id/vendorCounterLabel" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toBottomOf="@+id/vendorCounterLabel" />
+
+            <TextView
+                android:id="@+id/errLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="حدث خطأ يرجي إعادة المحاولة"
+                android:textAlignment="center"
+                android:textSize="@dimen/dimen_14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toBottomOf="@+id/vendorCounterLabel" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/FilterFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_12dp"
+                android:clickable="true"
+                android:onClick="@{()-> fragment.showFilterSheet()}"
+                android:src="@drawable/ic_baseline_filter_list_24"
+                app:fabCustomSize="@dimen/dimen_56dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

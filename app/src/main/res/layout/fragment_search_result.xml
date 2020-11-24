@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.unicom.wasalakclientproduct.ui.search.SearchResultFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.unicom.wasalakclientproduct.ui.search.SearchViewModel" />
+
+        <variable
+            name="storeAdapter"
+            type="com.unicom.wasalakclientproduct.ui.search.StoreSearchListAdapter" />
+
+        <variable
+            name="productAdapter"
+            type="com.unicom.wasalakclientproduct.ui.search.SearchProductsAdapter" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                style="@style/MyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/header_linear_bg"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@id/toolbar_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/toolbar_img"
+                        app:layout_constraintTop_toTopOf="@id/toolbar_img">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fontFamily="@font/cairo_regular"
+                            android:hint="@string/search_want"
+                            android:paddingStart="@dimen/dimen_12dp"
+                            android:singleLine="true"
+                            android:focusable="false"
+                            android:inputType="none"
+                            android:clickable="true"
+                            android:textAlignment="viewStart"
+                            android:textColorHint="@color/malachite"
+                            android:textSize="@dimen/dimen_14sp"
+                            android:onClick="@{()->fragment.navigateToSearch()}"/>
+
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                            android:layout_width="@dimen/dimen_28dp"
+                            android:layout_height="@dimen/dimen_28dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginEnd="@dimen/dimen_8dp"
+                            android:backgroundTint="@color/colorAccent"
+                            android:clickable="true"
+                            android:onClick="@{()->fragment.navigateToSearch()}"
+                            app:cornerRadius="@dimen/dimen_24dp"
+                            app:icon="@drawable/ic_baseline_search_24"
+                            app:strokeWidth="0dp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/toolbar_img"
+                        android:layout_width="@dimen/dimen_24dp"
+                        android:layout_height="@dimen/dimen_24dp"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_16dp"
+                        android:layout_marginBottom="@dimen/dimen_12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_baseline_close_24"
+                        android:tint="#A8000000"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/dimen_16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/dimen_16dp" />
+
+            <FrameLayout
+                android:id="@+id/progress_bar_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-6dp"
+                    android:indeterminate="true"
+                     />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvEmptyData"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:fontFamily="@font/cairo_regular"
+                android:gravity="center"
+                android:text="@string/no_data_available"
+                android:textColor="#8A000000"
+                android:textSize="@dimen/dimen_16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/refresh"
+                app:layout_constraintEnd_toEndOf="@id/end_guide"
+                app:layout_constraintStart_toStartOf="@id/start_guide"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/dimen_12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/end_guide"
+                app:layout_constraintStart_toStartOf="@+id/start_guide"
+                app:layout_constraintTop_toBottomOf="@+id/progress_bar_frame">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clParent"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="@dimen/dimen_0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvStoreSearchResultData"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start"
+                        android:textColor="#8A000000"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="  3 منتجات كيك سريع التحضير" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSearchStore"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="@dimen/dimen_124dp"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStoreSearchResultData"
+                        tools:listitem="@layout/layout_search_vendor_list_row"
+                        android:adapter="@{storeAdapter}"
+                        />
+
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:alpha="0.5"
+                        android:background="@color/red_underline"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rvSearchStore"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/tvProductsSearchResultData"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start"
+                        android:textColor="#8A000000"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line1"
+                        tools:text=" عرض 7 منتجات ل كيك سريع التحضير " />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSearchProducts"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="@dimen/dimen_0dp"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvProductsSearchResultData"
+                        app:spanCount="2"
+                        android:adapter="@{productAdapter}"
+                        tools:listitem="@layout/layout_product_search_list_row" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/FilterFab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_12dp"
+                        android:clickable="true"
+                        android:onClick="@{()-> fragment.showFilterSheet()}"
+                        app:srcCompat="@drawable/ic_baseline_filter_list_24"
+                        app:tint="@color/white"
+                        app:backgroundTint="@color/fab_color"
+                        app:fabCustomSize="@dimen/dimen_56dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

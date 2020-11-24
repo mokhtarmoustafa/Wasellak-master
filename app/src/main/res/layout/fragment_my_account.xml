@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.unicom.wasalakclientproduct.ui.user.MyAccountFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.unicom.wasalakclientproduct.viewmodel.user.MyAccountViewModel" />
+
+        <variable
+            name="account"
+            type="com.unicom.wasalakclientproduct.model.user.AccountModel.Result" />
+
+        <variable
+            name="pref"
+            type="com.unicom.wasalakclientproduct.utils.PreferenceUtils" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.user.MarketsFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/new_order_toolbar"
+                style="@style/MyToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_toolbar"
+                android:paddingStart="@dimen/dimen_40dp"
+                app:title="@string/account"
+                app:titleTextColor="@color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0.1dp"
+                android:layout_gravity="bottom"
+                android:background="@color/whitesmoke" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9F9FB"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clTop"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <FrameLayout
+                        android:id="@+id/progress_bar_frame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            style="?android:progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-6dp"
+                            android:indeterminate="true"
+                            android:visibility="@{viewModel.isLoading == null || viewModel.isLoading ? fragment.view.VISIBLE : fragment.view.GONE}" />
+
+                    </FrameLayout>
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/profile_image"
+                        adjustViewBounds="true"
+                        android:layout_width="@dimen/dimen_80dp"
+                        android:layout_height="@dimen/dimen_80dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:onClick="@{()->fragment.clickViewProfile()}"
+                        android:src="@drawable/ic_wasellak_logo_color"
+                        app:civ_border_color="@color/gray"
+                        app:civ_border_width="@dimen/dimen_0.5dp"
+                        app:layout_constraintHeight_percent="0.1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.2" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_8dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="center_vertical|start"
+                        android:onClick="@{()->fragment.clickViewProfile()}"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:shadowColor="@color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:singleLine="true"
+                        android:text="@{account.firstName + ` ` + account.lastName}"
+                        android:textAlignment="viewStart"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/profile_image"
+                        app:layout_constraintTop_toTopOf="@id/profile_image"
+                        app:layout_constraintVertical_bias="0.18"
+                        tools:text="sdfsdfsdf sdfsdf" />
+
+                    <TextView
+                        android:id="@+id/account_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="center_vertical|start"
+                        android:onClick="@{()->fragment.clickViewProfile()}"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:shadowColor="@color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/account_details"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_14sp"
+                        app:layout_constraintStart_toStartOf="@+id/name"
+                        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                    <View
+                        android:id="@+id/name_line"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/orders"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_order"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:drawableTint="@color/light_gray"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start|center"
+                        android:onClick="@{()->fragment.clickMyOrders()}"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_14dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:paddingBottom="@dimen/dimen_14dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/my_orders"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintBottom_toTopOf="@id/orders"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/name_line" />
+
+                    <View
+                        android:id="@+id/line0"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/orders" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/addresses_profile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_location_on_24px"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:drawableTint="@color/light_gray"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start|center"
+                        android:onClick="@{()->fragment.clickAddresses()}"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_14dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:paddingBottom="@dimen/dimen_14dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/addresses"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/line0" />
+
+                    <View
+                        android:id="@+id/address_line"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addresses_profile" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clMiddle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_32dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clTop">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_notifications_none_24px"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:drawableTint="@color/light_gray"
+                        android:fontFamily="@font/cairo_regular"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/notifications_st"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/switch_notification"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/switch_notification" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_notification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:checked="@{fragment.preference.notification}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/line2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/switch_notification" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clLanguage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clMiddle">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/chane_lang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_language"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:drawableTint="@color/light_gray"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start|center"
+                        android:onClick="@{()->fragment.onClickLanguage()}"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_14dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:paddingBottom="@dimen/dimen_14dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/change_language"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentLanguage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="center_vertical|start"
+                        android:onClick="@{()->fragment.onClickLanguage()}"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:shadowColor="@color/black"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/chane_lang"
+                        app:layout_constraintStart_toStartOf="@+id/chane_lang"
+                        app:layout_constraintTop_toBottomOf="@+id/chane_lang"
+                        app:layout_constraintVertical_bias="1.0"
+                        tools:text="Arabic" />
+
+                    <View
+                        android:id="@+id/language_line"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCurrentLanguage" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mid2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_32dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clLanguage">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/questions"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_forum_24px"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:drawableTint="@color/light_gray"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start|center"
+                        android:onClick="@{()->fragment.clickQuestionsAndInquiries()}"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_14dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:paddingBottom="@dimen/dimen_14dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/questions_and_inquiries"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/line4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/questions" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/conditions"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_text_snippet_24px"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:drawableTint="@color/light_gray"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start|center"
+                        android:onClick="@{()->fragment.clickTermsAndConditions()}"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_14dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:paddingBottom="@dimen/dimen_14dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/terms_and_conditions"
+                        android:textColor="#442B2D"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/line4" />
+                    />
+
+                    <View
+                        android:id="@+id/conditions_line"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/conditions" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clBottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_32dp"
+                    android:layout_marginBottom="@dimen/dimen_32dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mid2"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/logout"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
+                        android:drawableEnd="@drawable/ic_arrow_forward"
+                        android:drawablePadding="@dimen/dimen_12dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="start|center"
+                        android:onClick="@{()->fragment.onClickLogout()}"
+                        android:paddingStart="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_14dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:paddingBottom="@dimen/dimen_14dp"
+                        android:shadowColor="@color/gray"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"
+                        android:text="@string/logout"
+                        android:textAllCaps="false"
+                        android:textColor="@color/logout"
+                        android:textSize="@dimen/dimen_16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    />
+
+                    <View
+                        android:id="@+id/logout_line"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_0.1dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:background="#ccc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/logout"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

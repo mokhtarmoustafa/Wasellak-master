@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/marketsFragment"
+        android:icon="@drawable/ic_requests"
+        android:title="@string/home_lbl"
+        android:enabled="true" />
+
+
+    <item
+        android:id="@+id/notificationFragment"
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/notifications_st"
+        android:enabled="true" />
+
+    <item
+        android:id="@+id/myAccountFragment"
+        android:icon="@drawable/ic_account"
+        android:title="@string/account"
+        android:enabled="true" />
+
+    <item
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/ic_cart_empty"
+        android:title="@string/cart"
+        android:enabled="true" />
+
+</menu>

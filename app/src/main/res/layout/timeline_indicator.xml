@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      >
+
+        <View
+            android:id="@+id/line_indicator_top"
+            android:layout_width="4dp"
+            android:layout_height="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:background="@drawable/state_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"/>
+
+        <View
+            android:id="@+id/dot_indicator"
+            android:layout_width="@dimen/dimen_8dp"
+            android:layout_height="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:background="@drawable/state_dot"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_indicator_top" />
+
+        <View
+            android:id="@+id/line_indicator_bottom"
+            android:layout_width="@dimen/dimen_4dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:background="@drawable/state_box"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dot_indicator"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/dot_indicator"
+            app:layout_constraintTop_toBottomOf="@+id/line_indicator_top"
+            app:layout_constraintVertical_bias="0.0">
+
+            <include
+                android:id="@+id/row_view"
+                layout="@layout/order_details_shipping_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
